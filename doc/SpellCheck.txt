@@ -161,6 +161,9 @@ IDEAS							    *SpellCheck-ideas*
 ==============================================================================
 HISTORY							  *SpellCheck-history*
 
+1.11	30-Apr-2012
+ENH: Capture corrected text and include in quickfix status message.
+
 1.10	30-Apr-2012
 ENH: Allow to manage the spelling errors (mark as good / bad word, globally
 replace with suggestion) directly from the quickfix window via the usual zg,
