@@ -55,10 +55,13 @@ MAPPINGS						 *SpellCheck-mappings*
 			Inside the quickfix window, the following mappings are
 			remapped so that they operate on the target spell
 			error: |zg|, |zG|, |zw|, |zW|, |zug|, |zuG|, |zuw|,
-			|zuW|, |z=|
+			|zuW|, |z=|, |u|
 			For |z=|, all identical misspellings in the buffer are
 			replaced with the chosen suggestion (via
 			|:spellrepall|).
+			You can also quickly undo the last spell suggestion
+			from the quickfix window (i.e. without switching to
+			the target buffer) via |u|.
 			For the other commands, the taken action is appended
 			to the quickfix list entry, so that the list serves as
 			a record of done actions (until you refresh the list
@@ -160,6 +163,10 @@ IDEAS							    *SpellCheck-ideas*
 
 ==============================================================================
 HISTORY							  *SpellCheck-history*
+
+1.13	02-May-2012
+ENH: In the quickfix list, apply undo via |u| to the target buffer to allow a
+quick revert of a spell correction.
 
 1.12	01-May-2012
 ENH: Allow spell checking of partial buffers by allowing [range] for
