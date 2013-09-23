@@ -76,12 +76,18 @@ in the buffer or passed [range] of lines.
 		       *:WriteDeleteUnlessSpellError*   *:XitUnlessSpellError*
 :BDeleteUnlessSpellError[!]	|:bdelete| the current buffer, unless it
 				contains spelling errors.
-:WriteUnlessSpellError[!]	|:write| the current buffer, unless it
+:WriteUnlessSpellError[!] [++opt] [file]
+				|:write| the current buffer, unless it
 				contains spelling errors.
-:WriteDeleteUnlessSpellError[!]	|:write| and |:bdelete| the current buffer,
+:WriteDeleteUnlessSpellError[!]  [++opt] [file]
+				|:write| and |:bdelete| the current buffer,
 				unless it contains spelling errors.
 :XitUnlessSpellError[!]		|:write|  the current buffer and |:quit|,
 				unless it contains spelling errors.
+						       *:NextUnlessSpellError*
+:NextUnlessSpellError[!] [++opt] [file]
+				Edit |:next| file, unless the current buffer
+				contains spelling errors.
 
 This set of commands automatically opens the quickfix list in case of spelling
 error in the buffer or passed [range] of lines.
@@ -89,13 +95,19 @@ error in the buffer or passed [range] of lines.
 			       *:WriteDeleteOrSpellCheck*   *:XitOrSpellCheck*
 :BDeleteOrSpellCheck[!]		|:bdelete| the current buffer, or show the
 				spelling errors in the quickfix list.
-:WriteOrSpellCheck[!]		|:write| the current buffer, or show the
+:WriteOrSpellCheck[!] [++opt] [file]
+				|:write| the current buffer, or show the
 				spelling errors in the quickfix list.
-:WriteDeleteOrSpellCheck[!]	|:write| and |:bdelete| the current buffer,
+:WriteDeleteOrSpellCheck[!] [++opt] [file]
+				|:write| and |:bdelete| the current buffer,
 				or show the spelling errors in the quickfix
 				list.
 :XitOrSpellCheck[!]		|:write| the current buffer and |:quit|, or
 				show the spelling errors in the quickfix list.
+							   *:NextOrSpellCheck*
+:NextOrSpellCheck[!] [++opt] [file]
+				Edit |:next| file, or show the current
+				buffer's spelling errors in the quickfix list.
 
 							*:UpdateAndSpellCheck*
 :UpdateAndSpellCheck[!]		|:update| the current buffer, and show any
@@ -108,16 +120,18 @@ error in the buffer or passed [range] of lines.
 INSTALLATION					     *SpellCheck-installation*
 
 This script is packaged as a |vimball|. If you have the "gunzip" decompressor
-in your PATH, simply edit the *.vba.gz package in Vim; otherwise, decompress
+in your PATH, simply edit the *.vmb.gz package in Vim; otherwise, decompress
 the archive first, e.g. using WinZip. Inside Vim, install by sourcing the
 vimball or via the |:UseVimball| command. >
-    vim SpellCheck.vba.gz
+    vim SpellCheck*.vmb.gz
     :so %
 To uninstall, use the |:RmVimball| command.
 
 DEPENDENCIES					     *SpellCheck-dependencies*
 
 - Requires Vim 7.0 or higher.
+- Requires the |ingo-library.vim| plugin (vimscript #4433), version 1.001 or
+  higher.
 
 ==============================================================================
 CONFIGURATION					    *SpellCheck-configuration*
@@ -166,6 +180,12 @@ IDEAS							    *SpellCheck-ideas*
 ==============================================================================
 HISTORY							  *SpellCheck-history*
 
+1.21	23-Sep-2013
+- Add :NextUnlessSpellError and :NextOrSpellCheck auxiliary commands.
+- Allow to pass optional [++opt] [file] arguments to the :Write... commands.
+- Add dependency to ingo-library (vimscript #4433). *** You need to separately
+  install ingo-library (vimscript #4433) version 1.001 (or higher)! ***
+
 1.20	08-May-2012
 - FIX: Line range is not defined and passed for :BDeleteOrSpellCheck and other
   :...OrSpellCheck commands, resulting in a script error.
@@ -199,8 +219,8 @@ First published version.
 Started development.
 
 ==============================================================================
-Copyright: (C) 2011-2012 Ingo Karkat
-The VIM LICENSE applies to this script; see |copyright|.
+Copyright: (C) 2011-2013 Ingo Karkat
+The VIM LICENSE applies to this plugin; see |copyright|.
 
 Maintainer:	Ingo Karkat <ingo@karkat.de>
 ==============================================================================

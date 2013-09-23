@@ -2,14 +2,17 @@
 "
 " DEPENDENCIES:
 "   - SpellCheck.vim autoload script
-"   - ingocollections.vim autoload script
+"   - ingo/collections.vim autoload script
 "
-" Copyright: (C) 2012 Ingo Karkat
+" Copyright: (C) 2012-2013 Ingo Karkat
 "   The VIM LICENSE applies to this script; see ':help copyright'.
 "
 " Maintainer:	Ingo Karkat <ingo@karkat.de>
 "
 " REVISION	DATE		REMARKS
+"   1.21.006	14-Jun-2013	Minor: Make substitute() robust against
+"				'ignorecase'.
+"   1.21.005	21-Feb-2013	Move to ingo-library.
 "   1.13.004	01-May-2012	ENH: Apply undo to the target buffer to allow a
 "				quick revert of a spell correction.
 "   1.11.003	30-Apr-2012	ENH: Capture corrected text and include in
@@ -104,7 +107,7 @@ endfunction
 function! s:InsertMessage( entry, statusMessage )
     let l:entry = a:entry
     if a:statusMessage =~# '\<undo '
-	let l:entry = substitute(l:entry, '\C\V' . printf(' [%s]\$', escape(substitute(a:statusMessage, 'undo ', '', ''), '\')), '', '')
+	let l:entry = substitute(l:entry, '\C\V' . printf(' [%s]\$', escape(substitute(a:statusMessage, '\Cundo ', '', ''), '\')), '', '')
     endif
     if l:entry ==# a:entry
 	let l:entry .= printf(' [%s]', a:statusMessage)
@@ -141,8 +144,8 @@ function! s:GetCorrectedText()
     " have to split the line where the correction occurred manually into words
     " and cut away identical words from the front and end until we've narrowed
     " it down to the change.
-    let l:beforeWords = ingocollections#SplitKeepSeparators(s:beforeLineContent, '\k\@!.')
-    let l:afterWords = ingocollections#SplitKeepSeparators(s:afterLineContent, '\k\@!.')
+    let l:beforeWords = ingo#collections#SplitKeepSeparators(s:beforeLineContent, '\k\@!.')
+    let l:afterWords = ingo#collections#SplitKeepSeparators(s:afterLineContent, '\k\@!.')
 
     let l:startIdx = 0
     while get(l:beforeWords, l:startIdx, '') ==# get(l:afterWords, l:startIdx, '')

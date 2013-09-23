@@ -22,7 +22,7 @@ these replacement commands, you'll never send or commit messages full of
 embarrassing typos any more!
 
 USAGE
-:[range]SpellCheck[!]	Show all spelling errors as a quickfix list.
+:[range]SpellCheck[!]   Show all spelling errors as a quickfix list.
                         For multiple occurrences of the same error, the first
                         location and the number of occurrences is shown.
                         If [!] is not given the first error is jumped to.
@@ -30,50 +30,64 @@ USAGE
                         In the quickfix list, spelling errors from other
                         buffers are kept, so you can use something like
                             :argdo SpellCheck
-                        to gather the spelling errors from multiple buffers.
+                       to gather the spelling errors from multiple buffers.
 
-:[range]SpellLCheck[!]	Same as :SpellCheck, except the location list for the
+:[range]SpellLCheck[!]  Same as :SpellCheck, except the location list for the
                         current window is used instead of the quickfix list.
 
 MAPPINGS
-			Inside the quickfix window, the following mappings are
-			remapped so that they operate on the target spell
-			error: zg, zG, zw, zW, zug, zuG, zuw,
-			zuW, z=, u
-			For z=, all identical misspellings in the buffer are
-			replaced with the chosen suggestion (via
-			:spellrepall).
-			You can also quickly undo the last spell suggestion
-			from the quickfix window (i.e. without switching to
-			the target buffer) via u.
-			For the other commands, the taken action is appended
-			to the quickfix list entry, so that the list serves as
-			a record of done actions (until you refresh the list
-			with a new :SpellCheck).
+                        Inside the quickfix window, the following mappings are
+                        remapped so that they operate on the target spell
+                        error: zg, zG, zw, zW, zug, zuG, zuw,
+                        zuW, z=, u
+                        For z=, all identical misspellings in the buffer are
+                        replaced with the chosen suggestion (via
+                        :spellrepall).
+                        You can also quickly undo the last spell suggestion
+                        from the quickfix window (i.e. without switching to
+                        the target buffer) via u.
+                        For the other commands, the taken action is appended
+                        to the quickfix list entry, so that the list serves as
+                        a record of done actions (until you refresh the list
+                        with a new :SpellCheck).
 
 AUXILIARY COMMANDS
 The following set of commands just issue an error when spelling errors exist
 in the buffer or passed [range] of lines.
+
 :BDeleteUnlessSpellError[!]     :bdelete the current buffer, unless it
                                 contains spelling errors.
-:WriteUnlessSpellError[!]       :write the current buffer, unless it
+:WriteUnlessSpellError[!] [++opt] [file]
+                                :write the current buffer, unless it
                                 contains spelling errors.
-:WriteDeleteUnlessSpellError[!] :write and :bdelete the current buffer,
+:WriteDeleteUnlessSpellError[!]  [++opt] [file]
+                                :write and :bdelete the current buffer,
                                 unless it contains spelling errors.
 :XitUnlessSpellError[!]         :write  the current buffer and :quit,
                                 unless it contains spelling errors.
 
+:NextUnlessSpellError[!] [++opt] [file]
+                                Edit :next file, unless the current buffer
+                                contains spelling errors.
+
 This set of commands automatically opens the quickfix list in case of spelling
 error in the buffer or passed [range] of lines.
+
 :BDeleteOrSpellCheck[!]         :bdelete the current buffer, or show the
                                 spelling errors in the quickfix list.
-:WriteOrSpellCheck[!]           :write the current buffer, or show the
+:WriteOrSpellCheck[!] [++opt] [file]
+                                :write the current buffer, or show the
                                 spelling errors in the quickfix list.
-:WriteDeleteOrSpellCheck[!]     :write and :bdelete the current buffer,
+:WriteDeleteOrSpellCheck[!] [++opt] [file]
+                                :write and :bdelete the current buffer,
                                 or show the spelling errors in the quickfix
                                 list.
 :XitOrSpellCheck[!]             :write the current buffer and :quit, or
                                 show the spelling errors in the quickfix list.
+
+:NextOrSpellCheck[!] [++opt] [file]
+                                Edit :next file, or show the current
+                                buffer's spelling errors in the quickfix list.
 
 :UpdateAndSpellCheck[!]         :update the current buffer, and show any
                                 spelling errors in the quickfix list.
